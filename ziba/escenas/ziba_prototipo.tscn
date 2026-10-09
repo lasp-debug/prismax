@@ -1,33 +1,23 @@
 [gd_scene format=3 uid="uid://cf7g1lnty3shw"]
 
-[ext_resource type="Script" uid="uid://clhs7nbxsnkk4" path="res://generador_ciudad.gd" id="1_ciudad"]
-[ext_resource type="PackedScene" uid="uid://caueivavcv3mb" path="res://Leo/leo_jugador.tscn" id="2_jugador"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/caminar/agachado_click.fbx" id="3_46ggp"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/caminar/Jumping Up (1).fbx" id="3_kcr08"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/attack/mode/calentamiento_ataque.fbx" id="3_skkuo"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/caminar/caminar_correr.fbx" id="4_87dcj"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/caminar/hacia atras.fbx" id="5_qwo3x"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/idle/inactivo.fbx" id="6_qwo3x"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/run/Fast Run.fbx" id="6_vl4ji"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/attack/combos/combo-1.fbx" id="7_y4rbe"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/idle/inactivo_velocidad.fbx" id="7_yu6gv"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/attack/combos/combo-2.fbx" id="8_3efv8"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/caminar/saltar.fbx" id="9_kcr08"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/run/superduper_velocidad.fbx" id="9_luf5j"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/attack/combos/combo-3.fbx" id="9_u66f0"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/attack/combos/combo-4.fbx" id="10_dkl4u"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/attack/mode/inactivo_modo_ataque.fbx" id="14_x5dtm"]
+[ext_resource type="PackedScene" uid="uid://caueivavcv3mb" path="res://personaje/base/escenas/leo_jugador.tscn" id="2_jugador"]
+[ext_resource type="AnimationLibrary" path="res://personaje/transformaciones/velocidad/animaciones/cargar_poder.tres" id="3_46ggp"]
+[ext_resource type="AnimationLibrary" path="res://personaje/transformaciones/velocidad/animaciones/salto_aire.tres" id="3_kcr08"]
+[ext_resource type="AnimationLibrary" path="res://personaje/transformaciones/velocidad/animaciones/calentamiento_ataque.tres" id="3_skkuo"]
+[ext_resource type="AnimationLibrary" path="res://personaje/transformaciones/velocidad/animaciones/caminar_hacia_adelante.tres" id="4_87dcj"]
+[ext_resource type="AnimationLibrary" path="res://personaje/transformaciones/velocidad/animaciones/caminar_hacia_atras.tres" id="5_qwo3x"]
+[ext_resource type="AnimationLibrary" path="res://personaje/transformaciones/velocidad/animaciones/inactivo.tres" id="6_qwo3x"]
+[ext_resource type="AnimationLibrary" path="res://personaje/transformaciones/velocidad/animaciones/dash.tres" id="6_vl4ji"]
+[ext_resource type="AnimationLibrary" path="res://personaje/transformaciones/velocidad/animaciones/combo_1.tres" id="7_y4rbe"]
+[ext_resource type="AnimationLibrary" path="res://personaje/transformaciones/velocidad/animaciones/inactivo_velocidad.tres" id="7_yu6gv"]
+[ext_resource type="AnimationLibrary" path="res://personaje/transformaciones/velocidad/animaciones/combo_2.tres" id="8_3efv8"]
+[ext_resource type="AnimationLibrary" path="res://personaje/transformaciones/velocidad/animaciones/saltar.tres" id="9_kcr08"]
+[ext_resource type="AnimationLibrary" path="res://personaje/transformaciones/velocidad/animaciones/superduper_velocidad.tres" id="9_luf5j"]
+[ext_resource type="AnimationLibrary" path="res://personaje/transformaciones/velocidad/animaciones/combo_3.tres" id="9_u66f0"]
+[ext_resource type="AnimationLibrary" path="res://personaje/transformaciones/velocidad/animaciones/combo_4.tres" id="10_dkl4u"]
+[ext_resource type="AnimationLibrary" path="res://personaje/transformaciones/velocidad/animaciones/inactivo_modo_ataque.tres" id="14_x5dtm"]
 [ext_resource type="PackedScene" path="res://ui/scenes/PauseMenu.tscn" id="15_pausa"]
-[ext_resource type="Shader" uid="uid://bwulkkuba71mw" path="res://ziba/shaders/distorsion_velocidad.gdshader" id="25_h3pa0"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jugador"]
-radius = 0.4
-height = 1.9
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_distorsion"]
-shader = ExtResource("25_h3pa0")
-shader_parameter/intensidad = 0.0
-shader_parameter/tiempo = 0.0
+[ext_resource type="Script" uid="uid://clhs7nbxsnkk4" path="res://generador_ciudad.gd" id="16_ciudad"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ciudad"]
 sky_top_color = Color(0.3, 0.47, 0.76, 1)
@@ -61,7 +51,7 @@ light_energy = 1.25
 shadow_enabled = true
 
 [node name="Ciudad" type="Node3D" parent="." unique_id=338105555]
-script = ExtResource("1_ciudad")
+script = ExtResource("16_ciudad")
 crear_camara_y_luz = false
 generar_en_editor = false
 camara_libre = false
@@ -72,38 +62,44 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.1436781, 4)
 [node name="Modelo" parent="Jugador/Visual/Pose/Volteo" parent_id_path=PackedInt32Array(110866062, 1889189844) index="0" unique_id=575471977]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.04462242, 0)
 
-[node name="Skeleton3D" parent="Jugador/Visual/Pose/Volteo/Modelo" index="0" unique_id=915810492]
-bones/3/position = Vector3(0, 0.051267, -3.217135e-10)
-bones/3/rotation = Quaternion(-1.110223e-16, 0, 0, 1)
-bones/5/position = Vector3(-2.7105054e-20, 0.04888542, 0.0026744872)
-bones/5/rotation = Quaternion(3.3087225e-24, 0, 0, 1)
-bones/8/position = Vector3(-7.239202e-11, 0.06351467, -6.045293e-10)
-bones/9/position = Vector3(1.2130014e-10, 0.11666024, 2.0795077e-10)
-bones/10/position = Vector3(-2.691978e-10, 0.113363676, 1.12865606e-10)
-bones/12/position = Vector3(-0.0011962061, 0.019260928, 7.460177e-11)
-bones/12/rotation = Quaternion(0.0045633106, -4.8468122e-27, -6.938967e-18, 0.99998957)
-bones/13/position = Vector3(0.0005186216, 0.01683185, 1.1279e-10)
-bones/13/rotation = Quaternion(0.0102790445, -6.93926e-18, 1.3531558e-16, 0.9999472)
-bones/15/position = Vector3(1.2743262e-10, 0.039256565, 0.001208608)
-bones/16/position = Vector3(0.0012159231, 0.030744433, 1.6451251e-10)
-bones/16/rotation = Quaternion(0.042269643, -1.3890204e-17, -1.562648e-17, 0.9991062)
-bones/17/position = Vector3(-0.00016457232, 0.017198818, -4.623124e-11)
-bones/17/rotation = Quaternion(0.051553752, -4.16888e-17, 3.474067e-18, 0.9986702)
-bones/20/position = Vector3(6.6776196e-11, 0.06351467, -6.051579e-10)
-bones/21/position = Vector3(1.794623e-10, 0.11666901, 6.3381334e-10)
-bones/22/position = Vector3(-3.082635e-10, 0.113225624, -5.054368e-11)
-bones/24/position = Vector3(0.0024300786, 0.020292655, 1.4779578e-10)
-bones/24/rotation = Quaternion(0.011033639, 2.0817949e-17, -1.04089745e-17, 0.99993914)
-bones/25/position = Vector3(6.493275e-05, 0.015908416, -5.298132e-10)
-bones/25/rotation = Quaternion(-0.015541435, 6.939732e-18, -3.8168526e-17, 0.99987924)
-bones/28/position = Vector3(-0.0025183787, 0.02706318, 7.182577e-11)
-bones/28/rotation = Quaternion(0.15661635, -7.0255924e-17, 2.5028674e-17, 0.9876596)
-bones/29/position = Vector3(0.0014861214, 0.024220634, 4.8276083e-10)
-bones/29/rotation = Quaternion(-0.0057523157, 9.7146136e-17, -3.4695045e-17, 0.99998343)
-bones/32/position = Vector3(4.979748e-10, 0.24576804, 3.489863e-11)
-bones/39/position = Vector3(1.3361281e-09, 0.09419466, -1.6025695e-09)
+[node name="Skeleton3D" parent="Jugador/Visual/Pose/Volteo/Modelo" index="0" unique_id=1790161205]
+bones/0/position = Vector3(0.0013391983, 0.5638954, -0.006681502)
+bones/0/rotation = Quaternion(-0.036755793, -0.36739174, -0.012595481, 0.92925435)
+bones/1/rotation = Quaternion(-0.0010900572, 0.04099177, -0.007233684, 0.9991327)
+bones/2/rotation = Quaternion(0.10063454, 0.08249706, -0.010109719, 0.9914458)
+bones/3/rotation = Quaternion(0.10063441, 0.08249713, -0.010109709, 0.9914458)
+bones/4/rotation = Quaternion(0.014010742, -0.011196737, 0.001605245, 0.9998379)
+bones/5/rotation = Quaternion(-0.054468956, 0.17692325, -0.012970553, 0.98263067)
+bones/7/rotation = Quaternion(-0.59569997, -0.38591474, 0.6092888, -0.35352296)
+bones/8/rotation = Quaternion(0.37998322, -0.10140053, 0.027159117, 0.9190175)
+bones/9/rotation = Quaternion(0.03157907, 0.04999849, 0.40393755, 0.91287315)
+bones/10/rotation = Quaternion(-0.17691937, 0.40368038, -0.0050376584, 0.8976171)
+bones/11/rotation = Quaternion(0.1904793, 0.10018977, 0.2663197, 0.9395497)
+bones/12/rotation = Quaternion(-0.0064623146, 0.00042994856, 0.042840622, 0.999061)
+bones/13/rotation = Quaternion(1.7185695e-05, 0.0004183057, 0.009913769, 0.9999508)
+bones/15/rotation = Quaternion(0.018851755, -0.009271312, 0.08868816, 0.99583787)
+bones/16/rotation = Quaternion(0.13225679, -0.0020748037, 0.029861595, 0.9907634)
+bones/17/rotation = Quaternion(5.248189e-05, -0.0016405069, -0.022197383, 0.9997523)
+bones/19/rotation = Quaternion(0.6507033, -0.34295484, 0.5710131, 0.36457017)
+bones/20/rotation = Quaternion(0.32358932, 0.121681176, 0.20374496, 0.915954)
+bones/21/rotation = Quaternion(0.082708366, 0.03683395, -0.35273895, 0.9313313)
+bones/22/rotation = Quaternion(0.08629178, -0.330522, -0.117937274, 0.93241614)
+bones/23/rotation = Quaternion(0.10051779, 0.0388679, -0.23338602, 0.96639353)
+bones/24/rotation = Quaternion(0.07445926, -0.002269464, 0.11058966, 0.99107045)
+bones/25/rotation = Quaternion(-0.0001838766, 0.0016862751, -0.11250852, 0.99364936)
+bones/27/rotation = Quaternion(0.042697836, 0.013908872, -0.05367113, 0.9975484)
+bones/28/rotation = Quaternion(0.13775535, -7.162522e-05, 0.023146974, 0.99019575)
+bones/29/rotation = Quaternion(-1.9428322e-05, -0.00033548762, -0.0028134105, 0.99999607)
+bones/31/rotation = Quaternion(0.06810522, 0.22698922, 0.96888584, -0.07139903)
+bones/32/rotation = Quaternion(-0.3253371, 0.11589035, 0.024344187, 0.9381538)
+bones/33/rotation = Quaternion(0.46069783, -0.08459863, 0.040530596, 0.8825859)
+bones/34/rotation = Quaternion(0.34748197, -0.17372781, 0.040420316, 0.92056566)
+bones/36/rotation = Quaternion(-0.11921241, 0.04053649, 0.98719174, 0.0979687)
+bones/37/rotation = Quaternion(-0.3134661, 0.08046762, -0.07659115, 0.943079)
+bones/38/rotation = Quaternion(0.55944157, 0.13395575, 0.03245139, 0.8173298)
+bones/39/rotation = Quaternion(0.33668447, 0.19485903, -0.066406384, 0.9188383)
 
-[node name="AnimationPlayer" parent="Jugador/Visual/Pose/Volteo/Modelo" index="1" unique_id=2132445361]
+[node name="AnimationPlayer" parent="Jugador/Visual/Pose/Volteo/Modelo" index="1" unique_id=1696814342]
 libraries/calentamiento_ataque = ExtResource("3_skkuo")
 libraries/caminar_hacia_adelante = ExtResource("4_87dcj")
 libraries/caminar_hacia_atras = ExtResource("5_qwo3x")
@@ -119,12 +115,6 @@ libraries/inactivo_modo_ataque = ExtResource("14_x5dtm")
 "libraries/jumping up(1)" = ExtResource("3_kcr08")
 libraries/saltar = ExtResource("9_kcr08")
 libraries/superduper_velocidad = ExtResource("9_luf5j")
-
-[node name="Colision" parent="Jugador" index="2" unique_id=173065853]
-shape = SubResource("CapsuleShape3D_jugador")
-
-[node name="Distorsion" parent="Jugador/CapaVelocidad" parent_id_path=PackedInt32Array(110866062, 1379529396) index="0" unique_id=89004942]
-material = SubResource("ShaderMaterial_distorsion")
 
 [node name="Pausa" parent="." unique_id=263530486 instance=ExtResource("15_pausa")]
 
