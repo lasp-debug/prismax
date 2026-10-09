@@ -10,21 +10,21 @@
 [ext_resource type="PackedScene" uid="uid://dtm4csncmfx8y" path="res://Leo/models/Standing W_Briefcase Idle.fbx" id="8_leofbx"]
 [ext_resource type="AnimationLibrary" uid="uid://irn1qan22vls" path="res://Leo/animations/leo_animations.tres" id="9_leoanims"]
 [ext_resource type="PackedScene" uid="uid://upwbuhn5j0h2" path="res://personaje/modelo_velocidad.fbx" id="10_vfbx"]
-[ext_resource type="AnimationLibrary" uid="uid://kiuct5ihcval" path="res://ziba/animaciones/caminar/caminar_correr.fbx" id="11_caminar_adelante"]
-[ext_resource type="AnimationLibrary" uid="uid://b87e5lxeba5d1" path="res://ziba/animaciones/caminar/hacia atras.fbx" id="12_caminar_atras"]
-[ext_resource type="AnimationLibrary" uid="uid://bkocgyratnsj1" path="res://ziba/animaciones/caminar/agachado_click.fbx" id="13_carga"]
-[ext_resource type="AnimationLibrary" uid="uid://djdekoarbfifi" path="res://ziba/animaciones/attack/combos/combo-1.fbx" id="14_combo1"]
-[ext_resource type="AnimationLibrary" uid="uid://c8yek06flq3hl" path="res://ziba/animaciones/attack/combos/combo-2.fbx" id="15_combo2"]
-[ext_resource type="AnimationLibrary" uid="uid://x2j5qgdmkpkq" path="res://ziba/animaciones/attack/combos/combo-3.fbx" id="16_combo3"]
-[ext_resource type="AnimationLibrary" uid="uid://dnexlolaucy05" path="res://ziba/animaciones/attack/combos/combo-4.fbx" id="17_combo4"]
-[ext_resource type="AnimationLibrary" uid="uid://y4fkpjtrlyxy" path="res://ziba/animaciones/run/Fast Run.fbx" id="18_dash"]
-[ext_resource type="AnimationLibrary" uid="uid://iv4vct42jlky" path="res://ziba/animaciones/idle/inactivo.fbx" id="19_inactivo"]
-[ext_resource type="AnimationLibrary" uid="uid://dxbopgomgcn3k" path="res://ziba/animaciones/idle/inactivo_velocidad.fbx" id="20_inactivo_vel"]
-[ext_resource type="AnimationLibrary" uid="uid://c4m8vhctog108" path="res://ziba/animaciones/attack/mode/inactivo_modo_ataque.fbx" id="21_modo_ataque"]
-[ext_resource type="AnimationLibrary" uid="uid://dcf7231oesppw" path="res://ziba/animaciones/caminar/Jumping Up (1).fbx" id="22_jumping"]
-[ext_resource type="AnimationLibrary" uid="uid://g8mvtidp2461" path="res://ziba/animaciones/caminar/saltar.fbx" id="23_saltar"]
-[ext_resource type="AnimationLibrary" uid="uid://b1s2w78tw4gi7" path="res://ziba/animaciones/run/superduper_velocidad.fbx" id="24_super"]
-[ext_resource type="AnimationLibrary" uid="uid://dh46n2tlv0qq7" path="res://ziba/animaciones/attack/mode/calentamiento_ataque.fbx" id="25_calentamiento"]
+[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/caminar/caminar_correr.fbx" id="11_caminar_adelante"]
+[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/caminar/hacia atras.fbx" id="12_caminar_atras"]
+[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/caminar/agachado_click.fbx" id="13_carga"]
+[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/attack/combos/combo-1.fbx" id="14_combo1"]
+[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/attack/combos/combo-2.fbx" id="15_combo2"]
+[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/attack/combos/combo-3.fbx" id="16_combo3"]
+[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/attack/combos/combo-4.fbx" id="17_combo4"]
+[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/run/Fast Run.fbx" id="18_dash"]
+[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/idle/inactivo.fbx" id="19_inactivo"]
+[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/idle/inactivo_velocidad.fbx" id="20_inactivo_vel"]
+[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/attack/mode/inactivo_modo_ataque.fbx" id="21_modo_ataque"]
+[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/caminar/Jumping Up (1).fbx" id="22_jumping"]
+[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/caminar/saltar.fbx" id="23_saltar"]
+[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/run/superduper_velocidad.fbx" id="24_super"]
+[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/attack/mode/calentamiento_ataque.fbx" id="25_calentamiento"]
 [ext_resource type="Script" uid="uid://cgdy25a3isao3" path="res://Leo/efecto_transformacion.gd" id="26_transf"]
 [ext_resource type="PackedScene" path="res://ui/scenes/MenuTransformaciones.tscn" id="27_menu"]
 [ext_resource type="Script" uid="uid://cb47m3mkx71jn" path="res://hud/scripts/estadisticas_jugador.gd" id="28_stats"]
@@ -144,13 +144,13 @@ libraries/ = ExtResource("32_aquatic_anims")
 
 [node name="Fuerza" type="Node3D" parent="." unique_id=539067988]
 
-[node name="Model" type="Node3D" parent="Fuerza" unique_id=1981338413]
+[node name="Model" type="Node3D" parent="Fuerza"]
 
-[node name="CharacterModel" type="Node3D" parent="Fuerza/Model" unique_id=83653701]
+[node name="CharacterModel" type="Node3D" parent="Fuerza/Model"]
 transform = Transform3D(-1.98, 0, 0, 0, 1.98, 0, 0, 0, -1.98, 0, 0, 0)
 
-[node name="FuerzaModel" parent="Fuerza/Model/CharacterModel" unique_id=526987561 instance=ExtResource("34_fuerza_model")]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.027668355, 0)
+[node name="FuerzaModel" parent="Fuerza/Model/CharacterModel" instance=ExtResource("34_fuerza_model")]
 
-[node name="AnimadorFuerza" type="AnimationPlayer" parent="Fuerza" unique_id=152839447]
+[node name="AnimadorFuerza" type="AnimationPlayer" parent="Fuerza"]
+root_node = NodePath("..")
 libraries/ = ExtResource("35_fuerza_anims")
