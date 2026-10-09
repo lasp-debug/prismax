@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://da3c6le0oehc5"
-path.s3tc="res://.godot/imported/T_dark_interior.png-5861a2ad9db4ac2a6bcd9accf8c92efc.s3tc.ctex"
+path.s3tc="res://.godot/imported/T_dark_interior.png-54aa53a4e58f3a774b634e6daad796ec.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/T_dark_interior.png"
-dest_files=["res://.godot/imported/T_dark_interior.png-5861a2ad9db4ac2a6bcd9accf8c92efc.s3tc.ctex"]
+source_file="res://Textures/T_dark_interior.png"
+dest_files=["res://.godot/imported/T_dark_interior.png-54aa53a4e58f3a774b634e6daad796ec.s3tc.ctex"]
 
 [params]
 

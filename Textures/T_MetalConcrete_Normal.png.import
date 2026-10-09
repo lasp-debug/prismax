@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://cf4sj1j1pav5w"
-path.s3tc="res://.godot/imported/T_MetalConcrete_Normal.png-e34b321faf0f7c37d04ca6f52ea3946c.s3tc.ctex"
+path.s3tc="res://.godot/imported/T_MetalConcrete_Normal.png-245da02013a119893ef0394d44297954.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/T_MetalConcrete_Normal.png"
-dest_files=["res://.godot/imported/T_MetalConcrete_Normal.png-e34b321faf0f7c37d04ca6f52ea3946c.s3tc.ctex"]
+source_file="res://Textures/T_MetalConcrete_Normal.png"
+dest_files=["res://.godot/imported/T_MetalConcrete_Normal.png-245da02013a119893ef0394d44297954.s3tc.ctex"]
 
 [params]
 

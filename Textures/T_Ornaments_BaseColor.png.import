@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://d4nwr7sacy7nq"
-path.s3tc="res://.godot/imported/T_Ornaments_BaseColor.png-de5427a85baa83414e55f758b79a48e5.s3tc.ctex"
+path.s3tc="res://.godot/imported/T_Ornaments_BaseColor.png-345046b93db46fff714cfdd244b9d99f.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/T_Ornaments_BaseColor.png"
-dest_files=["res://.godot/imported/T_Ornaments_BaseColor.png-de5427a85baa83414e55f758b79a48e5.s3tc.ctex"]
+source_file="res://Textures/T_Ornaments_BaseColor.png"
+dest_files=["res://.godot/imported/T_Ornaments_BaseColor.png-345046b93db46fff714cfdd244b9d99f.s3tc.ctex"]
 
 [params]
 

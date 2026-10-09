@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://dbowdfs5866iv"
-path.s3tc="res://.godot/imported/T_lit_interior_2.png-24ff9495c5e7820b89fa9e30b89493d2.s3tc.ctex"
+path.s3tc="res://.godot/imported/T_lit_interior_2.png-02ebc31240f12348e40392a1bb8a896b.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/T_lit_interior_2.png"
-dest_files=["res://.godot/imported/T_lit_interior_2.png-24ff9495c5e7820b89fa9e30b89493d2.s3tc.ctex"]
+source_file="res://Textures/T_lit_interior_2.png"
+dest_files=["res://.godot/imported/T_lit_interior_2.png-02ebc31240f12348e40392a1bb8a896b.s3tc.ctex"]
 
 [params]
 

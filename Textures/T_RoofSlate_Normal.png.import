@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://crbge2s5alogi"
-path.s3tc="res://.godot/imported/T_RoofSlate_Normal.png-42b4b5abc7733582de8478cb3590472f.s3tc.ctex"
+path.s3tc="res://.godot/imported/T_RoofSlate_Normal.png-90a62a6e361ec38fd1f1ef9a421e734c.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/T_RoofSlate_Normal.png"
-dest_files=["res://.godot/imported/T_RoofSlate_Normal.png-42b4b5abc7733582de8478cb3590472f.s3tc.ctex"]
+source_file="res://Textures/T_RoofSlate_Normal.png"
+dest_files=["res://.godot/imported/T_RoofSlate_Normal.png-90a62a6e361ec38fd1f1ef9a421e734c.s3tc.ctex"]
 
 [params]
 

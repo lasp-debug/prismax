@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://tbubgspg4doy"
-path.s3tc="res://.godot/imported/T_MetalConcrete_BaseColor.png-9845b2b256f564d4717d941bd93dd93f.s3tc.ctex"
+path.s3tc="res://.godot/imported/T_MetalConcrete_BaseColor.png-ea1c934f4275b388bd1fb0141c900fda.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/T_MetalConcrete_BaseColor.png"
-dest_files=["res://.godot/imported/T_MetalConcrete_BaseColor.png-9845b2b256f564d4717d941bd93dd93f.s3tc.ctex"]
+source_file="res://Textures/T_MetalConcrete_BaseColor.png"
+dest_files=["res://.godot/imported/T_MetalConcrete_BaseColor.png-ea1c934f4275b388bd1fb0141c900fda.s3tc.ctex"]
 
 [params]
 

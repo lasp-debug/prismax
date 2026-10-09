@@ -3,7 +3,7 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://c1a2ph0vjnps0"
-path.s3tc="res://.godot/imported/T_Concrete_Asphalt_BaseColor.png-2cc2822a7d2fbe68aab46ae7f59a330a.s3tc.ctex"
+path.s3tc="res://.godot/imported/T_Concrete_Asphalt_BaseColor.png-6540ca05e768af7315a595c9a1007704.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://textures/T_Concrete_Asphalt_BaseColor.png"
-dest_files=["res://.godot/imported/T_Concrete_Asphalt_BaseColor.png-2cc2822a7d2fbe68aab46ae7f59a330a.s3tc.ctex"]
+source_file="res://Textures/T_Concrete_Asphalt_BaseColor.png"
+dest_files=["res://.godot/imported/T_Concrete_Asphalt_BaseColor.png-6540ca05e768af7315a595c9a1007704.s3tc.ctex"]
 
 [params]
 
