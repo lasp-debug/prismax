@@ -167,20 +167,39 @@ const ANIM_F_SHOULDERECOVER := "ShoulderRecover"
 
 # ------------------------------------------- Velocista: supervelocidad (ziba/)
 # Animaciones existentes (librerías del AnimationPlayer del modelo velocista).
-const ANIM_INACTIVO := "inactivo"
-const ANIM_ADELANTE := "caminar_hacia_adelante"
-const ANIM_ATRAS := "caminar_hacia_atras"
-const ANIM_CARGA := "cargar_poder_click-derecho"
-const ANIM_DASH := "dash-con-shift"
-const ANIM_SALTO := "jumping up(1)"
-const ANIM_SUPERVELOCIDAD := "superduper_velocidad"
-const ANIM_INACTIVO_VELOCIDAD := "inactivo_despues-despues-de-30s-velocidad"
+const ANIM_INACTIVO := "idle"
+const ANIM_ADELANTE := "walk"
+const ANIM_ATRAS := "walk_backwards"
+const ANIM_CARGA := "crouch_walk"
+const ANIM_DASH := "fast_run"
+const ANIM_SALTO := "jump_up"
+const ANIM_SUPERVELOCIDAD := "fast_run"
+const ANIM_INACTIVO_VELOCIDAD := "fast_run"
 const ANIM_COMBO_1 := "combo-1"
 const ANIM_COMBO_2 := "combo-2"
 const ANIM_COMBO_3 := "combo-3"
 const ANIM_COMBO_4 := "combo-4"
 const ANIM_MODO_ATAQUE := "inactivo_modo_ataque"
 const ANIM_EMOTE := "calentamiento_ataque"
+
+# Fuente (FBX de res://ziba/) de cada animación del velocista. Cada FBX importa una
+# librería con un único clip "mixamo_com"; se registran nombradas por su clave y se
+# reproducen como "<clave>/mixamo_com".
+const VEL_FUENTES := {
+	"idle": "res://ziba/animaciones/idle/inactivo.fbx",
+	"walk": "res://ziba/animaciones/caminar/caminar_correr.fbx",
+	"walk_backwards": "res://ziba/animaciones/caminar/hacia atras.fbx",
+	"crouch_walk": "res://ziba/animaciones/caminar/agachado_click.fbx",
+	"fast_run": "res://ziba/animaciones/run/Fast Run.fbx",
+	"jump_up": "res://ziba/animaciones/caminar/saltar.fbx",
+	"running_jump": "res://ziba/animaciones/caminar/Jumping Up (1).fbx",
+	"combo-1": "res://ziba/animaciones/attack/combos/combo-1.fbx",
+	"combo-2": "res://ziba/animaciones/attack/combos/combo-2.fbx",
+	"combo-3": "res://ziba/animaciones/attack/combos/combo-3.fbx",
+	"combo-4": "res://ziba/animaciones/attack/combos/combo-4.fbx",
+	"inactivo_modo_ataque": "res://ziba/animaciones/attack/mode/inactivo_modo_ataque.fbx",
+	"calentamiento_ataque": "res://ziba/animaciones/attack/mode/calentamiento_ataque.fbx",
+}
 
 # Tiempos de blending (idénticos al prototipo).
 const BLEND_MARCHA := 0.25
@@ -333,7 +352,7 @@ func _ready() -> void:
 	combate.golpe_realizado.connect(_on_golpe_realizado)
 	# Atacar también corta la regeneración de resistencia (sistema de daño/HUD):
 	# se reutiliza la señal de combate existente, sin crear un segundo sistema.
-	combate.golpe_realizado.connect(estadisticas.notificar_ataque)
+	combate.golpe_realizado.connect(func(_indice: int) -> void: estadisticas.notificar_ataque())
 	# El menú radial (F) es sólo una NUEVA forma de elegir la transformación:
 	# emite qué transformación eligió el jugador y aquí se reutiliza el sistema
 	# que ya existía. También avisa al abrir/cerrar para congelar el control.
@@ -1642,30 +1661,26 @@ func _procesar_carga(delta: float) -> void:
 	efectos.actualizar_carga(t)
 	pivote.vibracion = lerpf(0.15, 1.0, t)
 	pivote.objetivo_largo = pivote.largo_base * lerpf(0.6, 0.42, t)
-
 	if Input.is_action_just_released("cargar_poder"):
-		_soltar_carga()
-
-func _soltar_carga() -> void:
-	pivote.permitir_look = true
-	pivote.vibracion = 0.0
-	pivote.objetivo_largo = pivote.largo_base
-	pivote.objetivo_fov = pivote.fov_base
-	pivote.definir_pitch(-0.25)
-	var muestras := trazador.finalizar()
-	efectos.terminar_carga()
-	if muestras.size() >= 2:
-		_puntos = muestras
-		_idx = 0
-		_vel_trayecto = vel_trayecto_min
-		_t_preparado = 0.0
-		estado = Estado.PREPARADO
-		pivote.objetivo_largo = pivote.largo_base * 0.7
-		pivote.objetivo_fov = pivote.fov_base + 12.0
-		pivote.vibracion = 0.5
-	else:
-		trazador.limpiar()
-		estado = Estado.NORMAL
+		pivote.permitir_look = true
+		pivote.vibracion = 0.0
+		pivote.objetivo_largo = pivote.largo_base
+		pivote.objetivo_fov = pivote.fov_base
+		pivote.definir_pitch(-0.25)
+		var muestras := trazador.finalizar()
+		efectos.terminar_carga()
+		if muestras.size() >= 2:
+			_puntos = muestras
+			_idx = 0
+			_vel_trayecto = vel_trayecto_min
+			_t_preparado = 0.0
+			estado = Estado.PREPARADO
+			pivote.objetivo_largo = pivote.largo_base * 0.7
+			pivote.objetivo_fov = pivote.fov_base + 12.0
+			pivote.vibracion = 0.5
+		else:
+			trazador.limpiar()
+			estado = Estado.NORMAL
 
 func _procesar_preparado(delta: float) -> void:
 	_t_preparado += delta
@@ -1742,16 +1757,24 @@ func _configurar_animaciones() -> void:
 	if _anim == null:
 		push_warning("[Leo] Sin AnimationPlayer en el modelo velocista: la forma velocista se movera sin animaciones.")
 		return
-	for lib_nombre in _anim.get_animation_library_list():
-		var clave := String(lib_nombre)
-		if clave.is_empty():
-			continue
-		var lib: AnimationLibrary = _anim.get_animation_library(lib_nombre)
+	# El velocista usa SUS PROPIAS animaciones (FBX de res://ziba/), NO la librería del
+	# Leo humano. Sus pistas son "Skeleton3D:...", relativas al modelo velocista, así que
+	# la raíz del AnimationPlayer es ese modelo (el padre del AnimationPlayer).
+	# (leo_animations.tres trae las traslaciones en las unidades diminutas del modelo
+	# humano: aplicadas al velocista hundían el hueso raíz ~1.5 m y lo enterraban.)
+	_anim.root_node = NodePath("..")
+	_anim_nombres.clear()
+	for clave: String in VEL_FUENTES:
+		var ruta: String = VEL_FUENTES[clave]
+		var lib := load(ruta) as AnimationLibrary
 		if lib == null or lib.get_animation_list().is_empty():
 			continue
-		var clip := lib.get_animation_list()[0]
-		_anim_nombres[clave] = "%s/%s" % [clave, clip]
-		_preparar_bucle(clave, lib.get_animation(clip))
+		var clip: String = lib.get_animation_list()[0]
+		if not _anim.has_animation_library(clave):
+			_anim.add_animation_library(clave, lib)
+		var nombre := "%s/%s" % [clave, clip]
+		_anim_nombres[clave] = nombre
+		_preparar_bucle(clave, _anim.get_animation(nombre))
 
 func _preparar_bucle(clave: String, anim: Animation) -> void:
 	match clave:

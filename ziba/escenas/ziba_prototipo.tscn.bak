@@ -19,6 +19,12 @@
 
 [ext_resource type="PackedScene" path="res://ui/scenes/PauseMenu.tscn" id="15_pausa"]
 [ext_resource type="Shader" uid="uid://bwulkkuba71mw" path="res://ziba/shaders/distorsion_velocidad.gdshader" id="25_h3pa0"]
+[ext_resource type="PackedScene" path="res://NPCs/Scenes/NPC_Citizen.tscn" id="16_citizen"]
+[ext_resource type="Script" path="res://NPCs/Scripts/npc_spawner.gd" id="17_spawner"]
+[ext_resource type="Script" path="res://NPCs/Scripts/city_navigation.gd" id="18_nav"]
+[ext_resource type="PackedScene" path="res://Assets NPCS/UrbanMan_PolyMate_alstrainfinite/GLB/UrbanMan_CityFolks_PolyMate.glb" id="19_urban"]
+[ext_resource type="PackedScene" path="res://Assets NPCS/CityFolks_PolyMate_alstrainfinite/GLB/Deportista/Deportista_CityFolks_PolyMate.glb" id="20_depor"]
+[ext_resource type="PackedScene" path="res://Assets NPCS/CityFolks_PolyMate_alstrainfinite/GLB/Muscle Man/MuscleMan_CityFolks_PolyMate.glb" id="21_muscle"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jugador"]
 radius = 0.4
@@ -113,6 +119,24 @@ shape = SubResource("CapsuleShape3D_jugador")
 material = SubResource("ShaderMaterial_distorsion")
 
 [node name="Pausa" parent="." unique_id=263530486 instance=ExtResource("15_pausa")]
+
+[node name="Navegacion" type="NavigationRegion3D" parent="." unique_id=597148231]
+script = ExtResource("18_nav")
+ciudad_path = NodePath("../Ciudad")
+
+[node name="Ciudadanos" type="Node3D" parent="." unique_id=597148232]
+script = ExtResource("17_spawner")
+npc_scene = ExtResource("16_citizen")
+citizen_models = Array[PackedScene]([ExtResource("19_urban"), ExtResource("20_depor"), ExtResource("21_muscle")])
+npc_count = 60
+spawn_area = Rect2(-124, -124, 248, 248)
+spawn_min_distance = 4.0
+spawn_max_distance = 0.0
+min_spacing = 2.5
+wander_area = Rect2(-126, -126, 252, 252)
+player_clearance = 5.0
+poly_share = 1.0
+goap_share = 0.34
 
 [editable path="Jugador"]
 [editable path="Jugador/Visual/Pose/Volteo/Modelo"]
