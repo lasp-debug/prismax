@@ -13,6 +13,7 @@ extends CanvasLayer
 ## cuando esta abierta.
 
 const MenuOptionRes := preload("res://ui/scripts/menu_option.gd")
+const MenuAction := MenuOption.Action
 
 ## Escena del mundo que se reinicia con NEW GAME.
 const ESCENA_MUNDO := "res://ziba/escenas/ziba_prototipo.tscn"
@@ -163,14 +164,14 @@ func _activate(index: int) -> void:
 	if row == null:
 		return
 	match row.action:
-		MenuOptionRes.Action.CONTINUE:
+		MenuAction.CONTINUE:
 			cerrar()
-		MenuOptionRes.Action.NEW_GAME:
+		MenuAction.NEW_GAME:
 			if _pendiente == index:
 				_nueva_partida.call_deferred()
 			else:
 				_pedir_confirmacion(index, "NEW GAME: presiona de nuevo para confirmar.")
-		MenuOptionRes.Action.QUIT:
+		MenuAction.QUIT:
 			if _pendiente == index:
 				get_tree().quit()
 			else:

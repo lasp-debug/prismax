@@ -2,23 +2,29 @@
 
 [ext_resource type="Script" uid="uid://clhs7nbxsnkk4" path="res://generador_ciudad.gd" id="1_ciudad"]
 [ext_resource type="PackedScene" uid="uid://caueivavcv3mb" path="res://Leo/leo_jugador.tscn" id="2_jugador"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/caminar/agachado_click.fbx" id="3_46ggp"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/caminar/Jumping Up (1).fbx" id="3_kcr08"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/attack/mode/calentamiento_ataque.fbx" id="3_skkuo"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/caminar/caminar_correr.fbx" id="4_87dcj"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/caminar/hacia atras.fbx" id="5_qwo3x"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/idle/inactivo.fbx" id="6_qwo3x"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/run/Fast Run.fbx" id="6_vl4ji"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/attack/combos/combo-1.fbx" id="7_y4rbe"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/idle/inactivo_velocidad.fbx" id="7_yu6gv"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/attack/combos/combo-2.fbx" id="8_3efv8"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/caminar/saltar.fbx" id="9_kcr08"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/run/superduper_velocidad.fbx" id="9_luf5j"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/attack/combos/combo-3.fbx" id="9_u66f0"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/attack/combos/combo-4.fbx" id="10_dkl4u"]
-[ext_resource type="AnimationLibrary" path="res://ziba/animaciones/attack/mode/inactivo_modo_ataque.fbx" id="14_x5dtm"]
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 [ext_resource type="PackedScene" path="res://ui/scenes/PauseMenu.tscn" id="15_pausa"]
 [ext_resource type="Shader" uid="uid://bwulkkuba71mw" path="res://ziba/shaders/distorsion_velocidad.gdshader" id="25_h3pa0"]
+[ext_resource type="PackedScene" path="res://NPCs/Scenes/NPC_Citizen.tscn" id="16_citizen"]
+[ext_resource type="Script" path="res://NPCs/Scripts/npc_spawner.gd" id="17_spawner"]
+[ext_resource type="Script" path="res://NPCs/Scripts/city_navigation.gd" id="18_nav"]
+[ext_resource type="PackedScene" path="res://Assets NPCS/UrbanMan_PolyMate_alstrainfinite/GLB/UrbanMan_CityFolks_PolyMate.glb" id="19_urban"]
+[ext_resource type="PackedScene" path="res://Assets NPCS/CityFolks_PolyMate_alstrainfinite/GLB/Deportista/Deportista_CityFolks_PolyMate.glb" id="20_depor"]
+[ext_resource type="PackedScene" path="res://Assets NPCS/CityFolks_PolyMate_alstrainfinite/GLB/Muscle Man/MuscleMan_CityFolks_PolyMate.glb" id="21_muscle"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jugador"]
 radius = 0.4
@@ -104,21 +110,7 @@ bones/32/position = Vector3(4.979748e-10, 0.24576804, 3.489863e-11)
 bones/39/position = Vector3(1.3361281e-09, 0.09419466, -1.6025695e-09)
 
 [node name="AnimationPlayer" parent="Jugador/Visual/Pose/Volteo/Modelo" index="1" unique_id=2132445361]
-libraries/calentamiento_ataque = ExtResource("3_skkuo")
-libraries/caminar_hacia_adelante = ExtResource("4_87dcj")
-libraries/caminar_hacia_atras = ExtResource("5_qwo3x")
-libraries/cargar_poder_click-derecho = ExtResource("3_46ggp")
-libraries/combo-1 = ExtResource("7_y4rbe")
-libraries/combo-2 = ExtResource("8_3efv8")
-libraries/combo-3 = ExtResource("9_u66f0")
-libraries/combo-4 = ExtResource("10_dkl4u")
-libraries/dash-con-shift = ExtResource("6_vl4ji")
-libraries/inactivo = ExtResource("6_qwo3x")
-libraries/inactivo_despues-despues-de-30s-velocidad = ExtResource("7_yu6gv")
-libraries/inactivo_modo_ataque = ExtResource("14_x5dtm")
-"libraries/jumping up(1)" = ExtResource("3_kcr08")
-libraries/saltar = ExtResource("9_kcr08")
-libraries/superduper_velocidad = ExtResource("9_luf5j")
+
 
 [node name="Colision" parent="Jugador" index="2" unique_id=173065853]
 shape = SubResource("CapsuleShape3D_jugador")
@@ -127,6 +119,24 @@ shape = SubResource("CapsuleShape3D_jugador")
 material = SubResource("ShaderMaterial_distorsion")
 
 [node name="Pausa" parent="." unique_id=263530486 instance=ExtResource("15_pausa")]
+
+[node name="Navegacion" type="NavigationRegion3D" parent="." unique_id=597148231]
+script = ExtResource("18_nav")
+ciudad_path = NodePath("../Ciudad")
+
+[node name="Ciudadanos" type="Node3D" parent="." unique_id=597148232]
+script = ExtResource("17_spawner")
+npc_scene = ExtResource("16_citizen")
+citizen_models = Array[PackedScene]([ExtResource("19_urban"), ExtResource("20_depor"), ExtResource("21_muscle")])
+npc_count = 60
+spawn_area = Rect2(-124, -124, 248, 248)
+spawn_min_distance = 4.0
+spawn_max_distance = 0.0
+min_spacing = 2.5
+wander_area = Rect2(-126, -126, 252, 252)
+player_clearance = 5.0
+poly_share = 1.0
+goap_share = 0.34
 
 [editable path="Jugador"]
 [editable path="Jugador/Visual/Pose/Volteo/Modelo"]

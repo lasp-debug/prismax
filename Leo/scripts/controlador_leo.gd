@@ -167,20 +167,20 @@ const ANIM_F_SHOULDERECOVER := "ShoulderRecover"
 
 # ------------------------------------------- Velocista: supervelocidad (ziba/)
 # Animaciones existentes (librerías del AnimationPlayer del modelo velocista).
-const ANIM_INACTIVO := "inactivo"
-const ANIM_ADELANTE := "caminar_hacia_adelante"
-const ANIM_ATRAS := "caminar_hacia_atras"
-const ANIM_CARGA := "cargar_poder_click-derecho"
-const ANIM_DASH := "dash-con-shift"
-const ANIM_SALTO := "jumping up(1)"
-const ANIM_SUPERVELOCIDAD := "superduper_velocidad"
-const ANIM_INACTIVO_VELOCIDAD := "inactivo_despues-despues-de-30s-velocidad"
-const ANIM_COMBO_1 := "combo-1"
-const ANIM_COMBO_2 := "combo-2"
-const ANIM_COMBO_3 := "combo-3"
-const ANIM_COMBO_4 := "combo-4"
-const ANIM_MODO_ATAQUE := "inactivo_modo_ataque"
-const ANIM_EMOTE := "calentamiento_ataque"
+const ANIM_INACTIVO := "idle"
+const ANIM_ADELANTE := "walk"
+const ANIM_ATRAS := "walk_backwards"
+const ANIM_CARGA := "crouch_walk"
+const ANIM_DASH := "fast_run"
+const ANIM_SALTO := "jump_up"
+const ANIM_SUPERVELOCIDAD := "fast_run"
+const ANIM_INACTIVO_VELOCIDAD := "fast_run"
+const ANIM_COMBO_1 := "fast_run"
+const ANIM_COMBO_2 := "walk"
+const ANIM_COMBO_3 := "walk_backwards"
+const ANIM_COMBO_4 := "running_jump"
+const ANIM_MODO_ATAQUE := "idle"
+const ANIM_EMOTE := "macarena_dance"
 
 # Tiempos de blending (idénticos al prototipo).
 const BLEND_MARCHA := 0.25
@@ -328,6 +328,9 @@ var _t_modo_ataque: float = 0.0
 var _salto_forzado: bool = false
 
 func _ready() -> void:
+	# El sistema de NPCs busca al jugador por el grupo "player" para girar la cabeza
+	# y acercarse a curiosear: Leo es el jugador del mundo, así que entra en el grupo.
+	add_to_group("player")
 	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
 	_configurar_animaciones()
 	combate.golpe_realizado.connect(_on_golpe_realizado)
@@ -1742,16 +1745,27 @@ func _configurar_animaciones() -> void:
 	if _anim == null:
 		push_warning("[Leo] Sin AnimationPlayer en el modelo velocista: la forma velocista se movera sin animaciones.")
 		return
-	for lib_nombre in _anim.get_animation_library_list():
-		var clave := String(lib_nombre)
-		if clave.is_empty():
+	_anim.root_node = NodePath("../../../Humano/Modelo")
+	var libreria_leo := load("res://Leo/animations/leo_animations.tres") as AnimationLibrary
+	if libreria_leo != null and _anim.get_animation_library_list().is_empty():
+		_anim.add_animation_library("", libreria_leo)
+	_anim_nombres.clear()
+	var claves: Array[String] = [
+		ANIM_INACTIVO, ANIM_ADELANTE, ANIM_ATRAS, ANIM_CARGA, ANIM_DASH, ANIM_SALTO,
+		ANIM_SUPERVELOCIDAD, ANIM_INACTIVO_VELOCIDAD, ANIM_COMBO_1, ANIM_COMBO_2,
+		ANIM_COMBO_3, ANIM_COMBO_4, ANIM_MODO_ATAQUE, ANIM_EMOTE,
+	]
+	var clips: Array[String] = [
+		"idle", "walk", "walk_backwards", "crouch_walk", "fast_run", "jump_up",
+		"fast_run", "idle", "fast_run", "walk", "walk_backwards", "jump_up", "idle", "macarena_dance",
+	]
+	for i: int in claves.size():
+		var clave: String = claves[i]
+		var clip: String = clips[i]
+		if not _anim.has_animation(clip):
 			continue
-		var lib: AnimationLibrary = _anim.get_animation_library(lib_nombre)
-		if lib == null or lib.get_animation_list().is_empty():
-			continue
-		var clip := lib.get_animation_list()[0]
-		_anim_nombres[clave] = "%s/%s" % [clave, clip]
-		_preparar_bucle(clave, lib.get_animation(clip))
+		_anim_nombres[clave] = clip
+		_preparar_bucle(clave, _anim.get_animation(clip))
 
 func _preparar_bucle(clave: String, anim: Animation) -> void:
 	match clave:

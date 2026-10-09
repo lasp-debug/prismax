@@ -8,7 +8,7 @@ extends MarginContainer
 
 enum Action { CONTINUE, NEW_GAME, QUIT }
 
-@export var action: Action = Action.CONTINUE
+@export_enum("CONTINUE", "NEW_GAME", "QUIT") var action: int = 0
 @export_multiline var description: String = ""
 
 const COLOR_SELECTED := Color(0.99, 0.99, 1.0, 1.0)

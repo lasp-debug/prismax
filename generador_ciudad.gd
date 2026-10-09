@@ -242,6 +242,10 @@ var prueba_portales: Array[Vector3] = []
 var prueba_portales_dir: Array[Vector3] = []
 var prueba_esquinas: Array[Vector3] = []
 var prueba_esquinas_dir: Array[Vector3] = []
+## Manzanas que acabaron EDIFICADAS (no parque ni solar vacío), en coordenadas de mundo XZ.
+## El generador de navegación del mundo las usa para recortar la malla de navegación: los
+## ciudadanos caminan por calles y aceras, nunca por dentro de un edificio.
+var bloques_edificados: Array[Rect2] = []
 
 
 func _ready() -> void:
@@ -280,6 +284,7 @@ func generar_ciudad() -> void:
 	prueba_portales_dir.clear()
 	prueba_esquinas.clear()
 	prueba_esquinas_dir.clear()
+	bloques_edificados.clear()
 
 	# 1) Localizar e inspeccionar los modelos -------------------------------
 	_carpeta = _resolver_carpeta()
@@ -333,6 +338,24 @@ func limpiar_ciudad() -> void:
 	_colores_esfera.clear()
 	_pistas_cono.clear()
 	_colores_cono.clear()
+
+
+## Datos del trazado que necesita quien construya la malla de navegación del mundo (el sistema
+## de NPCs). Devuelve el marco de la ciudad, la retícula de calles, el semiancho del vial y las
+## manzanas edificadas, todo en coordenadas de mundo XZ. `listo` es falso si aún no hay trazado.
+func datos_navegacion() -> Dictionary:
+	if _trazado.is_empty():
+		return {"listo": false}
+	return {
+		"listo": true,
+		"off": _trazado.off,
+		"ext": _trazado.ext,
+		"paso": _trazado.paso,
+		"hw": _trazado.hw,
+		"calzada": _trazado.calzada,
+		"acera": _trazado.acera,
+		"bloques": bloques_edificados.duplicate(),
+	}
 
 
 # =============================================================================
@@ -1325,6 +1348,7 @@ func _generar_manzanas() -> void:
 			if parques.has(Vector2i(i, j)):
 				_parque(rect)
 				continue
+			bloques_edificados.append(rect)
 			# Losa de manzana: plataforma a cota de acera, 2 mm por debajo del
 			# pavimento del kit (así nunca queda un hueco a la vista y tampoco
 			# hay caras coplanares). Se retranquea 2 cm del borde.

@@ -94,13 +94,23 @@ func _spawn_when_navigation_ready() -> void:
 	# Espera a que el mapa no sólo tenga regiones, sino a que las consultas respondan:
 	# si no, los primeros ciudadanos caerían fuera de la malla de navegación.
 	var map := get_world_3d().navigation_map
-	for attempt in 60:
+	# Dos sondas: una en el propio nodo y otra separada de él. Un mapa TODAVÍA VACÍO (sin regiones
+	# sincronizadas) devuelve (0,0,0) para cualquier consulta, así que la sonda del origen colaría
+	# por buena (distancia 0,5) y los ciudadanos acabarían apilados en el origen. Exigir que TAMBIÉN
+	# la sonda desplazada caiga sobre la malla descarta ese falso positivo.
+	var probe_a := global_position + Vector3(0.0, 0.5, 0.0)
+	var probe_b := global_position + Vector3(6.0, 0.5, 6.0)
+	for attempt in 90:
 		await get_tree().physics_frame
 		NavigationServer3D.map_force_update(map)
-		if NavigationServer3D.map_get_iteration_id(map) > 0:
-			var probe := global_position + Vector3(0.0, 0.5, 0.0)
-			if NavigationServer3D.map_get_closest_point(map, probe).distance_to(probe) < 3.0:
-				break
+		if NavigationServer3D.map_get_iteration_id(map) <= 0:
+			continue
+		if NavigationServer3D.map_get_regions(map).is_empty():
+			continue
+		var closest_a := NavigationServer3D.map_get_closest_point(map, probe_a)
+		var closest_b := NavigationServer3D.map_get_closest_point(map, probe_b)
+		if closest_a.distance_to(probe_a) < 3.0 and closest_b.distance_to(probe_b) < 3.0:
+			break
 	spawn_citizens()
 
 

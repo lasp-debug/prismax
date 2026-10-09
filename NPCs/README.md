@@ -528,6 +528,37 @@ los clips de origen no han cambiado: se puede volver a ejecutar sin miedo.
 - Los exports (`trip_distance`, `pause_chance`, `turn_chance`, `hurry_chance`, `stay_chance`,
   `move_scale`, `turn_rate`…) se pueden ajustar por ciudadano o desde el generador sin tocar código.
 
+## Integración en el mapa del juego (`ziba/escenas/ziba_prototipo.tscn`)
+
+Los ciudadanos no viven sólo en la escena de prueba: el **mapa real del juego** (la ciudad
+procedural de `generador_ciudad.gd`) los tiene caminando por sus calles. Dos nodos nuevos en la
+escena del mundo lo hacen todo:
+
+- **`Navegacion`** (`NavigationRegion3D` + `NPCs/Scripts/city_navigation.gd`, clase
+  `CityNavigation`). La ciudad se genera al arrancar y NO trae malla de navegación. En vez de
+  hornearla (serían miles de mallas y cambiaría con cada semilla) se compone **a mano** desde el
+  trazado que el propio generador conoce (`GeneradorCiudad3D.datos_navegacion()`): se cubre el
+  marco de la ciudad con una cuadrícula de 3 m y se descartan las celdas que caen dentro de una
+  **manzana edificada**. Así los ciudadanos caminan por calles y aceras, nunca por dentro de un
+  edificio, y la malla funciona con cualquier semilla o tamaño de ciudad. Con la ciudad por
+  defecto (6×6 manzanas de 24 m, avenidas de 12 m) salen ~4.800 celdas.
+- **`Ciudadanos`** (`Node3D` + `NPCSpawner`): **60 ciudadanos** de los packs nuevos (City Folks /
+  Urban Man), repartidos por todo el mapa (área de 248×248 m) con sus reacciones, su variedad y
+  el planificador de siempre. El generador espera a que la malla esté de verdad registrada en el
+  servidor de navegación (**dos sondas**: un mapa todavía vacío devuelve (0,0,0) y colaría por
+  bueno) antes de colocar a nadie, para que no se apilen en el origen.
+
+El jugador del mundo (`ControladorLeo`) entra en el grupo **`player`** en su `_ready`: es como lo
+encuentran los ciudadanos para girar la cabeza hacia él y acercarse a curiosear.
+
+> **Assets necesarios.** Estos ciudadanos salen de los packs PolyMate (`City Folks`, `Urban Man`)
+> con las animaciones del rig nuevo. Los archivos se extraen de `npc assetss/*.zip` a
+> `Assets NPCS/...`, y el addon de planificación por objetivos a `addons/GdPlanningAI/`.
+>
+> **Aviso aparte (no es del sistema de NPCs).** Para que la escena del mundo cargue hacen falta
+> los `.fbx` de `res://ziba/animaciones/...` que referencia `Leo/leo_jugador.tscn`: en este
+> entorno sólo quedan sus `.fbx.import` y, sin los originales, la escena no se puede abrir.
+
 ## Notas técnicas
 
 - Capas de colisión: 1 = mundo, 2 = NPC, 4 = jugador. Los ciudadanos sólo colisionan con el mundo

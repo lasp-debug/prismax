@@ -7,6 +7,7 @@ extends Control
 ## label or ordering.
 
 const MenuOptionRes := preload("res://ui/scripts/menu_option.gd")
+const MenuAction := MenuOption.Action
 
 ## Scene loaded when the player starts a new game. This is the existing world
 ## scene; the menu only decides WHEN it loads, never how the world is built.
@@ -95,20 +96,20 @@ func _activate(index: int) -> void:
 	if row == null:
 		return
 	match row.action:
-		MenuOptionRes.Action.CONTINUE:
+		MenuAction.CONTINUE:
 			continue_requested.emit()
 			# TODO: resume the existing save once the save system exists.
 			# No save system yet, so we do NOT invent one and we do NOT load
 			# the world here: the entry point stays in the menu until the
 			# host game connects this signal to its own load routine.
-		MenuOptionRes.Action.NEW_GAME:
+		MenuAction.NEW_GAME:
 			new_game_requested.emit()
 			# Start the game: the menu scene ends and the existing world scene
 			# is loaded exactly as it was before (same scene, same generation).
 			# Deferred so the current input event finishes handling before the
 			# menu node is removed from the tree.
 			_ir_al_mundo.call_deferred()
-		MenuOptionRes.Action.QUIT:
+		MenuAction.QUIT:
 			get_tree().quit()
 
 ## Loads the world scene. Called deferred from _activate so the menu is still
