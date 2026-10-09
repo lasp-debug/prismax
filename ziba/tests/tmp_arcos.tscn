@@ -1,0 +1,92 @@
+[gd_scene load_steps=6 format=3]
+
+[ext_resource type="Script" path="res://ziba/tests/tmp_arcos.gd" id="1_prev"]
+[ext_resource type="Script" path="res://hud/scripts/indicador_anillo.gd" id="2_anillo"]
+[ext_resource type="Texture2D" path="res://hud de transformaciones/leo_humano.png" id="3_icon"]
+
+[sub_resource type="StyleBoxFlat" id="SB_disco"]
+bg_color = Color(0.05, 0.06, 0.09, 0.72)
+corner_radius_top_left = 60
+corner_radius_top_right = 60
+corner_radius_bottom_left = 60
+corner_radius_bottom_right = 60
+
+[node name="TmpArcos" type="Node2D"]
+script = ExtResource("1_prev")
+
+[node name="Fondo" type="ColorRect" parent="."]
+offset_right = 1152.0
+offset_bottom = 648.0
+color = Color(0.36, 0.29, 0.22, 1)
+
+[node name="Dial" type="Control" parent="."]
+offset_left = 458.0
+offset_top = 206.0
+offset_right = 694.0
+offset_bottom = 442.0
+mouse_filter = 2
+
+[node name="Disco" type="Panel" parent="Dial"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -60.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = 60.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("SB_disco")
+
+[node name="AnilloVida" type="Control" parent="Dial"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_anillo")
+radio = 96.0
+grosor = 16.0
+color = Color(0.9, 0.2, 0.24, 1)
+color_fondo = Color(0.08, 0.09, 0.12, 0.7)
+angulo_inicio = -1.5007963
+angulo_barrido = 3.0015927
+
+[node name="AnilloResistencia" type="Control" parent="Dial"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("2_anillo")
+radio = 96.0
+grosor = 13.0
+color = Color(0.2, 0.78, 1, 1)
+color_fondo = Color(0.08, 0.09, 0.12, 0.7)
+angulo_inicio = -1.6407963
+angulo_barrido = -3.0015927
+
+[node name="Icono" type="TextureRect" parent="Dial"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -46.0
+offset_right = 46.0
+offset_bottom = 46.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = ExtResource("3_icon")
+expand_mode = 1
+stretch_mode = 5
