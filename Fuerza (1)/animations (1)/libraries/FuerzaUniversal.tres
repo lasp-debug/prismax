@@ -1,4 +1,4 @@
-[gd_resource type="AnimationLibrary" format=3]
+[gd_resource type="AnimationLibrary" format=3 uid="uid://dkr5ck4qve6nu"]
 
 [sub_resource type="Animation" id="Animation_s6pnk"]
 resource_name = "golpe_aereo"
