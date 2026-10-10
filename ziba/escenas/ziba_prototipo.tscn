@@ -2,32 +2,8 @@
 
 [ext_resource type="Script" uid="uid://clhs7nbxsnkk4" path="res://generador_ciudad.gd" id="1_ciudad"]
 [ext_resource type="PackedScene" uid="uid://caueivavcv3mb" path="res://Leo/leo_jugador.tscn" id="2_jugador"]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 [ext_resource type="PackedScene" path="res://ui/scenes/PauseMenu.tscn" id="15_pausa"]
 [ext_resource type="Shader" uid="uid://bwulkkuba71mw" path="res://ziba/shaders/distorsion_velocidad.gdshader" id="25_h3pa0"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jugador"]
-radius = 0.4
-height = 1.9
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_distorsion"]
-shader = ExtResource("25_h3pa0")
-shader_parameter/intensidad = 0.0
-shader_parameter/tiempo = 0.0
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ciudad"]
 sky_top_color = Color(0.3, 0.47, 0.76, 1)
@@ -49,6 +25,15 @@ fog_enabled = true
 fog_light_color = Color(0.73, 0.76, 0.81, 1)
 fog_density = 0.00035
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jugador"]
+radius = 0.4
+height = 1.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_distorsion"]
+shader = ExtResource("25_h3pa0")
+shader_parameter/intensidad = 0.0
+shader_parameter/tiempo = 0.0
+
 [node name="ZibaPrototipo" type="Node3D" unique_id=1645821614]
 
 [node name="Entorno" type="WorldEnvironment" parent="." unique_id=754659190]
@@ -62,8 +47,8 @@ shadow_enabled = true
 
 [node name="Ciudad" type="Node3D" parent="." unique_id=338105555]
 script = ExtResource("1_ciudad")
-crear_camara_y_luz = false
 generar_en_editor = false
+crear_camara_y_luz = false
 camara_libre = false
 
 [node name="Jugador" parent="." unique_id=110866062 instance=ExtResource("2_jugador")]
@@ -102,9 +87,6 @@ bones/29/position = Vector3(0.0014861214, 0.024220634, 4.8276083e-10)
 bones/29/rotation = Quaternion(-0.0057523157, 9.7146136e-17, -3.4695045e-17, 0.99998343)
 bones/32/position = Vector3(4.979748e-10, 0.24576804, 3.489863e-11)
 bones/39/position = Vector3(1.3361281e-09, 0.09419466, -1.6025695e-09)
-
-[node name="AnimationPlayer" parent="Jugador/Visual/Pose/Volteo/Modelo" index="1" unique_id=2132445361]
-
 
 [node name="Colision" parent="Jugador" index="2" unique_id=173065853]
 shape = SubResource("CapsuleShape3D_jugador")

@@ -53,7 +53,7 @@ transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 [node name="AnimadorVelocista" type="AnimationPlayer" parent="Visual/Pose/Volteo/Modelo" unique_id=1078141862]
 
 [node name="Colision" type="CollisionShape3D" parent="." unique_id=173065853]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8821735, 0)
 shape = SubResource("CapsuleShape3D_jugador")
 
 [node name="PivoteCamara" type="Node3D" parent="." unique_id=1355070108]
@@ -120,7 +120,7 @@ libraries/ = ExtResource("32_aquatic_anims")
 transform = Transform3D(-1.98, 0, 0, 0, 1.98, 0, 0, 0, -1.98, 0, 0, 0)
 
 [node name="FuerzaModel" parent="Fuerza/Model/CharacterModel" unique_id=901131847 instance=ExtResource("34_fuerza_model")]
-transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.037764236, 0)
+transform = Transform3D(0.99999976, 0, 0, 0, 0.99999976, 0, 0, 0, 0.99999976, 0, -0.035005324, 0)
 
 [node name="AnimadorFuerza" type="AnimationPlayer" parent="Fuerza" unique_id=882850065]
 libraries/ = ExtResource("35_fuerza_anims")
