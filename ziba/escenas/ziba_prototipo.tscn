@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://clhs7nbxsnkk4" path="res://generador_ciudad.gd" id="1_ciudad"]
 [ext_resource type="PackedScene" uid="uid://caueivavcv3mb" path="res://Leo/leo_jugador.tscn" id="2_jugador"]
+<<<<<<< Updated upstream
 
 
 
@@ -17,17 +18,25 @@
 
 
 
+=======
+[ext_resource type="AnimationLibrary" uid="uid://bkocgyratnsj1" path="res://ziba/animaciones/caminar/agachado_click.fbx" id="3_46ggp"]
+[ext_resource type="AnimationLibrary" uid="uid://dcf7231oesppw" path="res://ziba/animaciones/caminar/Jumping Up (1).fbx" id="3_kcr08"]
+[ext_resource type="AnimationLibrary" uid="uid://dh46n2tlv0qq7" path="res://ziba/animaciones/attack/mode/calentamiento_ataque.fbx" id="3_skkuo"]
+[ext_resource type="AnimationLibrary" uid="uid://kiuct5ihcval" path="res://ziba/animaciones/caminar/caminar_correr.fbx" id="4_87dcj"]
+[ext_resource type="AnimationLibrary" uid="uid://b87e5lxeba5d1" path="res://ziba/animaciones/caminar/hacia atras.fbx" id="5_qwo3x"]
+[ext_resource type="AnimationLibrary" uid="uid://iv4vct42jlky" path="res://ziba/animaciones/idle/inactivo.fbx" id="6_qwo3x"]
+[ext_resource type="AnimationLibrary" uid="uid://y4fkpjtrlyxy" path="res://ziba/animaciones/run/Fast Run.fbx" id="6_vl4ji"]
+[ext_resource type="AnimationLibrary" uid="uid://djdekoarbfifi" path="res://ziba/animaciones/attack/combos/combo-1.fbx" id="7_y4rbe"]
+[ext_resource type="AnimationLibrary" uid="uid://dxbopgomgcn3k" path="res://ziba/animaciones/idle/inactivo_velocidad.fbx" id="7_yu6gv"]
+[ext_resource type="AnimationLibrary" uid="uid://c8yek06flq3hl" path="res://ziba/animaciones/attack/combos/combo-2.fbx" id="8_3efv8"]
+[ext_resource type="AnimationLibrary" uid="uid://g8mvtidp2461" path="res://ziba/animaciones/caminar/saltar.fbx" id="9_kcr08"]
+[ext_resource type="AnimationLibrary" uid="uid://b1s2w78tw4gi7" path="res://ziba/animaciones/run/superduper_velocidad.fbx" id="9_luf5j"]
+[ext_resource type="AnimationLibrary" uid="uid://x2j5qgdmkpkq" path="res://ziba/animaciones/attack/combos/combo-3.fbx" id="9_u66f0"]
+[ext_resource type="AnimationLibrary" uid="uid://dnexlolaucy05" path="res://ziba/animaciones/attack/combos/combo-4.fbx" id="10_dkl4u"]
+[ext_resource type="AnimationLibrary" uid="uid://c4m8vhctog108" path="res://ziba/animaciones/attack/mode/inactivo_modo_ataque.fbx" id="14_x5dtm"]
+>>>>>>> Stashed changes
 [ext_resource type="PackedScene" path="res://ui/scenes/PauseMenu.tscn" id="15_pausa"]
 [ext_resource type="Shader" uid="uid://bwulkkuba71mw" path="res://ziba/shaders/distorsion_velocidad.gdshader" id="25_h3pa0"]
-
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jugador"]
-radius = 0.4
-height = 1.9
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_distorsion"]
-shader = ExtResource("25_h3pa0")
-shader_parameter/intensidad = 0.0
-shader_parameter/tiempo = 0.0
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ciudad"]
 sky_top_color = Color(0.3, 0.47, 0.76, 1)
@@ -49,6 +58,15 @@ fog_enabled = true
 fog_light_color = Color(0.73, 0.76, 0.81, 1)
 fog_density = 0.00035
 
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jugador"]
+radius = 0.4
+height = 1.9
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_distorsion"]
+shader = ExtResource("25_h3pa0")
+shader_parameter/intensidad = 0.0
+shader_parameter/tiempo = 0.0
+
 [node name="ZibaPrototipo" type="Node3D" unique_id=1645821614]
 
 [node name="Entorno" type="WorldEnvironment" parent="." unique_id=754659190]
@@ -62,8 +80,8 @@ shadow_enabled = true
 
 [node name="Ciudad" type="Node3D" parent="." unique_id=338105555]
 script = ExtResource("1_ciudad")
-crear_camara_y_luz = false
 generar_en_editor = false
+crear_camara_y_luz = false
 camara_libre = false
 
 [node name="Jugador" parent="." unique_id=110866062 instance=ExtResource("2_jugador")]
