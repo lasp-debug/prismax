@@ -8,25 +8,8 @@
 [ext_resource type="Script" uid="uid://cq5blgtfiti8t" path="res://ziba/scripts/capa_velocidad.gd" id="6_capa"]
 [ext_resource type="Shader" uid="uid://bwulkkuba71mw" path="res://ziba/shaders/distorsion_velocidad.gdshader" id="7_shader"]
 [ext_resource type="PackedScene" uid="uid://dtm4csncmfx8y" path="res://Leo/models/Standing W_Briefcase Idle.fbx" id="8_leofbx"]
-[ext_resource type="AnimationLibrary" uid="uid://irn1qan22vls" path="res://Leo/animations/leo_animations.tres" id="9_leoanims"]
 [ext_resource type="PackedScene" uid="uid://upwbuhn5j0h2" path="res://personaje/modelo_velocidad.fbx" id="10_vfbx"]
-
-
-
-
-
-
-
-
-
-
 [ext_resource type="AnimationLibrary" uid="uid://irn1qan22vls" path="res://Leo/animations/leo_animations.tres" id="21_modo_ataque"]
-
-
-
-
-[ext_resource type="Script" uid="uid://hi3jonjrlwep" path="res://ui/scripts/menu_transformaciones.gd" id="13_d4k1h"]
-[ext_resource type="Script" uid="uid://2q0exvp7gbb8" path="res://hud/scripts/hud_circular.gd" id="16_180pv"]
 [ext_resource type="Script" uid="uid://cgdy25a3isao3" path="res://Leo/efecto_transformacion.gd" id="26_transf"]
 [ext_resource type="PackedScene" path="res://ui/scenes/MenuTransformaciones.tscn" id="27_menu"]
 [ext_resource type="Script" uid="uid://cb47m3mkx71jn" path="res://hud/scripts/estadisticas_jugador.gd" id="28_stats"]
@@ -36,7 +19,7 @@
 [ext_resource type="AnimationLibrary" uid="uid://chvk7ak2d0aqa" path="res://aquatic_transformation/animations/player_animations.tres" id="32_aquatic_anims"]
 [ext_resource type="Script" uid="uid://cljq6sirlwe4t" path="res://Leo/scripts/receptor_acuatico.gd" id="33_receptor_acuatico"]
 [ext_resource type="PackedScene" uid="uid://gorwfjfql5ie" path="res://Fuerza (1)/model (1)/tripo_convert_69413d1d-9e71-458a-9b8b-ac8ba6650d4c (1).fbx" id="34_fuerza_model"]
-[ext_resource type="AnimationLibrary" path="res://Fuerza (1)/animations (1)/libraries/FuerzaUniversal.tres" id="35_fuerza_anims"]
+[ext_resource type="AnimationLibrary" uid="uid://8u6ovdqk1mb3" path="res://Fuerza (1)/animations (1)/libraries/FuerzaUniversal.tres" id="35_fuerza_anims"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jugador"]
 radius = 0.4
@@ -52,11 +35,11 @@ script = ExtResource("1_ctrl")
 
 [node name="Humano" type="Node3D" parent="." unique_id=1240323414]
 
-[node name="Modelo" type="Node3D" parent="Humano" unique_id=445787447 instance=ExtResource("8_leofbx")]
+[node name="Modelo" parent="Humano" unique_id=445787447 instance=ExtResource("8_leofbx")]
 transform = Transform3D(-200, 0, 0, 0, 200, 0, 0, 0, -200, 0, 0, 0)
 
-[node name="Animador" type="AnimationPlayer" parent="Humano"]
-libraries/ = ExtResource("9_leoanims")
+[node name="Animador" type="AnimationPlayer" parent="Humano" unique_id=23796992]
+libraries/ = ExtResource("21_modo_ataque")
 
 [node name="Visual" type="Node3D" parent="." unique_id=445122354]
 
@@ -65,11 +48,9 @@ libraries/ = ExtResource("9_leoanims")
 [node name="Volteo" type="Node3D" parent="Visual/Pose" unique_id=1889189844]
 transform = Transform3D(-1, 0, 0, 0, 1, 0, 0, 0, -1, 0, 0, 0)
 
-[node name="Modelo" type="Node3D" parent="Visual/Pose/Volteo" unique_id=575471977 instance=ExtResource("10_vfbx")]
+[node name="Modelo" parent="Visual/Pose/Volteo" unique_id=575471977 instance=ExtResource("10_vfbx")]
 
-[node name="AnimadorVelocista" type="AnimationPlayer" parent="Visual/Pose/Volteo/Modelo"]
-
-
+[node name="AnimadorVelocista" type="AnimationPlayer" parent="Visual/Pose/Volteo/Modelo" unique_id=1078141862]
 
 [node name="Colision" type="CollisionShape3D" parent="." unique_id=173065853]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
@@ -113,16 +94,12 @@ script = ExtResource("26_transf")
 color = Color(0.6, 0.1, 1, 1)
 tiempo_bajada = 0.3
 
-[node name="MenuTransformaciones" type="CanvasLayer" parent="." unique_id=364961598 instance=ExtResource("27_menu")]
-layer = 50
-script = ExtResource("13_d4k1h")
+[node name="MenuTransformaciones" parent="." unique_id=364961598 instance=ExtResource("27_menu")]
 
 [node name="Estadisticas" type="Node" parent="." unique_id=984732758]
 script = ExtResource("28_stats")
 
-[node name="HUD" type="CanvasLayer" parent="." unique_id=2008386120 instance=ExtResource("29_hud")]
-layer = 10
-script = ExtResource("16_180pv")
+[node name="HUD" parent="." unique_id=2008386120 instance=ExtResource("29_hud")]
 
 [node name="Acuatico" type="Node3D" parent="." unique_id=321920416]
 script = ExtResource("33_receptor_acuatico")
@@ -130,8 +107,7 @@ script = ExtResource("33_receptor_acuatico")
 [node name="Visual" type="Node3D" parent="Acuatico" unique_id=770060105]
 script = ExtResource("30_model_slot")
 
-[node name="CharacterModel" type="Node3D" parent="Acuatico/Visual" unique_id=91546317 instance=ExtResource("31_aquatic")]
-transform = Transform3D(-1.7922248, 0, -1.5668127e-07, 0, 1.7922248, 0, 1.5668127e-07, 0, -1.7922248, 0, 0, 0)
+[node name="CharacterModel" parent="Acuatico/Visual" unique_id=91546317 instance=ExtResource("31_aquatic")]
 
 [node name="AnimadorAcuatico" type="AnimationPlayer" parent="Acuatico" unique_id=1053498957]
 libraries/ = ExtResource("32_aquatic_anims")
@@ -143,7 +119,8 @@ libraries/ = ExtResource("32_aquatic_anims")
 [node name="CharacterModel" type="Node3D" parent="Fuerza/Model" unique_id=1621234669]
 transform = Transform3D(-1.98, 0, 0, 0, 1.98, 0, 0, 0, -1.98, 0, 0, 0)
 
-[node name="FuerzaModel" type="Node3D" parent="Fuerza/Model/CharacterModel" unique_id=901131847 instance=ExtResource("34_fuerza_model")]
+[node name="FuerzaModel" parent="Fuerza/Model/CharacterModel" unique_id=901131847 instance=ExtResource("34_fuerza_model")]
+transform = Transform3D(0.99999994, 0, 0, 0, 0.99999994, 0, 0, 0, 0.99999994, 0, 0.037764236, 0)
 
 [node name="AnimadorFuerza" type="AnimationPlayer" parent="Fuerza" unique_id=882850065]
 libraries/ = ExtResource("35_fuerza_anims")
